@@ -1,0 +1,1 @@
+# PT_Angular_ResolverDesignPattern
