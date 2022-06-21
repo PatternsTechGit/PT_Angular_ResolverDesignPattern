@@ -14,24 +14,24 @@ In this lab we will be working on the **Frontend Code Base** only. We will only 
 
 ### **Backend Code Base:**
 
-Previously, we have developed Accounts APIs which are **GetAllAccounts** and **GetAllAccountsPaginated**. We will call the followings API to get all accounts which will return the result as in the image given below
-http://localhost:5070/api/Accounts/GetAllAccounts
+Previously, we have developed Accounts API in `BBBanlAPI` project with methods **GetAllAccounts** and **GetAllAccountsPaginated**. We will call the following API to get all accounts which will return the result in a JSON format as in the image given below
 
+http://localhost:5070/api/Accounts/GetAllAccounts
 ![](/readme-assets/images/allAccounts.png)
 
 There are 4 Projects in the solution. 
 
-*	Entities : This project contains DB models like User where each User has one Account and each Account can have one or many Transactions. There is also a Response Model of LineGraphData that will be returned as API Response. 
+*	**Entities**: This project contains DB models like User where each User has one Account and each Account can have one or many Transactions. There is also a Response Model of LineGraphData that will be returned as API Response. 
 
-*	Infrastructure: This project contains BBBankContext that service as fake DBContext that populates one User with its corresponding Account that has three Transactions dated of last three months with hardcoded data. 
+*	**Infrastructure**: This project contains BBBankContext that service as fake DBContext that populates one User with its corresponding Account that has three Transactions dated of last three months with hardcoded data. 
 
-* Services: This project contains AccountsService 
+* **Services**: This project contains AccountsService 
 
-* BBBankAPI: This project contains AccountsController with 2 GET methods  **GetAllAccounts** and **GetAllAccountsPaginated** to call the AccountsService.
+* **BBBankAPI**: This project contains AccountsController with two GET methods  **GetAllAccounts** and **GetAllAccountsPaginated** to call the AccountsService.
 
 ![](/readme-assets/images/4.png)
 
-For more details about this base project See: https://github.com/PatternsTechGit/PT_ServiceOrientedArchitecture
+For more details about this base project visit: https://github.com/PatternsTechGit/PT_ServiceOrientedArchitecture
 
 -----------
 
@@ -54,7 +54,7 @@ _____________
 * We will be implementing resolver pattern to resolve the data for the route 
 * We will populate the Html table using the response from the BBBankAPI
 
-### **Step 1: Creating client side model**
+### **Step 1: Creating Client Side Interfaces**
 
 We will create two interfaces for **Account** and **User** to receive data, as given below
 
@@ -84,9 +84,9 @@ export interface User {
 
 To set this up
 
-* Copy the Base URL from our API
+* Copy the `base URL` from our BBBankAPI project
 * Create a variable `apiUrlBase` in our environment script file
-* Assign this Url to the variable as show below
+* Assign this URL to the variable as show below
 
 ```ts
 export const environment = {
@@ -118,7 +118,7 @@ export default environment;
   ng generate service account
   ```
 
-  In this service we will first import *HttpClient*, *Account Model*, *Observable*, and *environment* file we just created we have created and will implement *getAllAccounts* method which will return an array of accounts in response of observable type.
+  In this service we will first import `HttpClient`, `Account Model`, `Observable`, and `environment` file we just created we have created and will implement `getAllAccounts` method which will return an array of accounts in response of observable type.
   
   ```ts
 import { Injectable } from '@angular/core';
@@ -135,7 +135,7 @@ export default class AccountsService {
   constructor(private httpClient: HttpClient) { }
 }
   ```
-  We have a function called *getAllAccounts* in the BBBankAPI's project that can be accessed with route Accounts/getAllAccounts 
+  We have a method called *getAllAccounts* in the BBBankAPI's project that can be accessed with route `Accounts/getAllAccounts`
 
   Create a function called getAllAccounts in `accountsService` to get all the accounts from the BBBankAPI. It will returns Observable of Array<Account> after hitting the API using httpClients Get verb. We have used the *apiUrlBase* from the environment file as the base URL 
 
