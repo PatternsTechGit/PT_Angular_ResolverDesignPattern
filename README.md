@@ -14,10 +14,10 @@ In this lab we will be working on the **Frontend Code Base** only. We will only 
 
 ### **Backend Code Base:**
 
-Previously, we have developed Accounts API in `BBBanlAPI` project with methods **GetAllAccounts** and **GetAllAccountsPaginated**. We will call the following API to get all accounts which will return the result in a JSON format as in the image given below
+Previously, we have developed Accounts API which is **GetAllAccounts**. We will call the followings API to get all accounts. We will call the following API to get all accounts which will return the result in a JSON format as in the image given below
 
 http://localhost:5070/api/Accounts/GetAllAccounts
-![](/readme-assets/images/allAccounts.png)
+![](./readme-assets/images/allAccounts.png)
 
 There are 4 Projects in the solution. 
 
@@ -27,7 +27,8 @@ There are 4 Projects in the solution.
 
 * **Services**: This project contains AccountsService 
 
-* **BBBankAPI**: This project contains AccountsController with two GET methods  **GetAllAccounts** and **GetAllAccountsPaginated** to call the AccountsService.
+* **BBBankAPI**: This project contains AccountsController with a GET method  **GetAllAccounts** to call the AccountsService.
+
 
 ![](/readme-assets/images/4.png)
 
@@ -192,29 +193,43 @@ Implement *ngOnInit* of the account component which will subscribe `activatedRou
 Create a simple table in the `account.component.html` file as shown below to show all accounts information like `title` and `current balance`
 
 ```html
-<table width="100%" class="table table-striped table-hover">
-<thead>
+<table>
     <tr>
-      <th width="20%">Account Title</th>
-      <th width="20%">Balance</th>
+        <th width="20%">Account Title</th>
+        <th width="20%">Balance</th>
     </tr>
-</thead>
-<tbody>
     <tr *ngFor="let account of accounts">
-      <td>
-        {{ account?.accountTitle }}
-      </td>
-      <td>
-        {{ account?.currentBalance }}
-      </td>
+        <td>
+            {{ account?.accountTitle }}
+        </td>
+        <td>
+            {{ account?.currentBalance }}
+        </td>
     </tr>
-  </tbody>
-</table>
+  </table>
 ```
 
 Add the following classes to the `account.component.css` file for styling
 
 ```css
+
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+  td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+  }
+  
+  tr:nth-child(even) {
+    background-color: #dddddd;
+  }
+
+  
 .table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th {
     border-color: rgba(255,255,255,.1);
     padding: 12px 7px;
@@ -273,10 +288,10 @@ Open the `routing.module.ts` file and add the given import
 import { AccountResolver } from './resolver/account.resolver';
 ```
 
-Add the given route to the `Routes` array with `account` as a path which will load `AccountComponent.ts`. 
+Add the given route to the `Routes` array with '' as a path which will load `AccountComponent.ts`. 
 
 ```ts
-{ path: 'account', component: AccountComponent, resolve: {accounts: AccountResolver} },
+{ path: '', component: AccountComponent, resolve: {accounts: AccountResolver} },
 ```
 
 The `resolve` property here will acts as a gateway between the API response and the route which will call the `AccountResolver` to resolve the data before loading the component
